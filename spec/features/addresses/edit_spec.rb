@@ -28,7 +28,6 @@ RSpec.describe "Edit Address Page" do
         expect(@addr_3.reload.city).to eq("Selah")
         expect(@addr_3.reload.state).to eq("Washington")
       end
-      # save_and_open_page
     end
   end
 end
