@@ -14,10 +14,10 @@ RSpec.describe 'User Registration' do
       visit registration_path
 
       fill_in 'Name', with: 'Megan'
-      fill_in 'Address', with: '123 Main St'
+      fill_in 'Street', with: '123 Main St'
       fill_in 'City', with: 'Denver'
       fill_in 'State', with: 'CO'
-      fill_in 'Zip', with: '80218'
+      fill_in 'Zip', with: 80218
       fill_in 'Email', with: 'megan@example.com'
       fill_in 'Password', with: 'securepassword'
       fill_in 'Password confirmation', with: 'securepassword'
