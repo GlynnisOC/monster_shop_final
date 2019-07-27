@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :reviews, only: [:edit, :update, :destroy]
   resources :addresses
- 
+
   get '/cart', to: 'cart#show'
   post '/cart/:item_id', to: 'cart#add_item'
   delete '/cart', to: 'cart#empty'
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :update]
   patch '/user/:id', to: 'users#update'
   get '/profile', to: 'users#show'
+  patch '/profile', to: 'addresses#update'
   get '/profile/edit', to: 'users#edit'
   get '/profile/edit_password', to: 'users#edit_password'
   post '/orders', to: 'user/orders#create'

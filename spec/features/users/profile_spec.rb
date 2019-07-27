@@ -110,7 +110,19 @@ RSpec.describe "User Profile Path" do
         click_button "Edit Address"
         expect(current_path).to eq(edit_address_path(@addr_2))
       end
+    end
 
+    it "I can delete my addresses" do
+      @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567)
+      @addr_3 = @user.addresses.create!(street: "Threet", city: "Walla Walla", state: "Cali", zip: 87654)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit profile_path
+
+      within "#address-#{@addr_2.id}" do
+        click_button "Edit Address"
+        expect(current_path).to eq(edit_address_path(@addr_2))
+      end
     end
   end
 end
