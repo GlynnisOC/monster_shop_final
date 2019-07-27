@@ -1,21 +1,6 @@
-<%= form_for @user do |f| %>
+<%= form_for @user, method: :patch do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-
-    <%= fields_for :addresses do |address| %>
-      <%= address.label :street %>
-      <%= address.text_field :street %>
-
-      <%= address.label :city %>
-      <%= address.text_field :city %>
-
-      <%= address.label :state %>
-      <%= address.text_field :state %>
-
-      <%= address.label :zip %>
-      <%= address.text_field :zip %>
-
-    <% end %>
 
   <%= f.label :email %>
   <%= f.email_field :email %>

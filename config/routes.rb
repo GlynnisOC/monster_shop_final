@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only: [:edit, :update, :destroy]
-
+  resources :addresses
+ 
   get '/cart', to: 'cart#show'
   post '/cart/:item_id', to: 'cart#add_item'
   delete '/cart', to: 'cart#empty'
