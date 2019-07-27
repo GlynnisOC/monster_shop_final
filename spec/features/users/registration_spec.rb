@@ -35,7 +35,7 @@ RSpec.describe 'User Registration' do
         click_button 'Register'
 
         expect(page).to have_button('Register')
-        expect(page).to have_content("address: [\"can't be blank\"]")
+        expect(page).to have_content("street: [\"can't be blank\"]")
         expect(page).to have_content("city: [\"can't be blank\"]")
         expect(page).to have_content("state: [\"can't be blank\"]")
         expect(page).to have_content("zip: [\"can't be blank\"]")
@@ -44,12 +44,12 @@ RSpec.describe 'User Registration' do
       end
 
       it 'I use a non-unique email' do
-        user = User.create(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword')
+        user = User.create(name: 'Megan', street: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword')
 
         visit registration_path
 
         fill_in 'Name', with: user.name
-        fill_in 'Address', with: user.address
+        fill_in 'Street', with: user.street
         fill_in 'City', with: user.city
         fill_in 'State', with: user.state
         fill_in 'Zip', with: user.zip

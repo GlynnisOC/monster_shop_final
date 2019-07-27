@@ -40,7 +40,7 @@ RSpec.describe 'New Merchant Creation' do
 
       click_button 'Create Merchant'
 
-      expect(page).to have_content("address: [\"can't be blank\"]")
+      expect(page).to have_content("street: [\"can't be blank\"]")
       expect(page).to have_content("city: [\"can't be blank\"]")
       expect(page).to have_content("state: [\"can't be blank\"]")
       expect(page).to have_content("zip: [\"can't be blank\"]")
