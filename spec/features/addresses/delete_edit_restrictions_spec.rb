@@ -32,5 +32,18 @@ RSpec.describe "User Profile Path" do
         expect(page).to_not have_button "Delete Address"
       end
     end
+
+    it "I cannot edit an address that has been shipped to" do
+
+      visit login_path
+
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: @user.password
+      click_button 'Log In'
+
+      within "#address-#{@address.id}" do
+        expect(page).to_not have_button "Edit Address"
+      end
+    end
   end
 end
