@@ -141,5 +141,18 @@ RSpec.describe "User Profile Path" do
       expect(current_path).to eq(profile_path)
       expect(page).to_not have_content(@addr_2.state)
     end
+
+    it "I can look at a specific address" do
+      @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567)
+      @addr_3 = @user.addresses.create!(street: "Threet", city: "Walla Walla", state: "Cali", zip: 87654)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit profile_path
+
+      within "#address-#{@addr_3.id}" do
+        click_button "View"
+        expect(current_path).to eq(address_path(@addr_3))
+      end
+    end
   end
 end

@@ -3,6 +3,10 @@ class AddressesController < ApplicationController
   def new
   end
 
+  def show
+    @address = Address.find(params[:id])
+  end
+
   def create
     address = current_user.addresses.create!(address_params)
     redirect_to profile_path
