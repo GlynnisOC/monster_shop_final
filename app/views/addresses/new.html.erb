@@ -1,0 +1,22 @@
+<h2>Enter New Address</h2>
+
+<%= form_tag profile_path do %>
+
+  <%= label_tag :street %>
+  <%= text_field_tag :street %>
+
+  <%= label_tag :city %>
+  <%= text_field_tag :city %>
+
+  <%= label_tag :state %>
+  <%= text_field_tag :state %>
+
+  <%= label_tag :zip %>
+  <%= number_field_tag :zip %>
+
+  <%= label_tag :nickname %>
+  <%= select_tag :nickname, options_for_select(["home", "office", "school"]) %>
+
+  <%= submit_tag "Add Address" %>
+
+<% end %>
