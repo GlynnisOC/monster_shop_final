@@ -12,5 +12,6 @@
   <p>Zip Code: <%= address.zip %></p>
   <h5>Nickname: <%= address.nickname %></h5>
   <%= button_to "Edit Address", edit_address_path(address), method: :get %>
+  <%= button_to "Delete Address", address_path(address), method: :delete %>
   </section>
 <% end %>

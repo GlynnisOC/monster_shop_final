@@ -120,5 +120,26 @@ RSpec.describe "User Profile Path" do
       click_button "Enter New Address"
       expect(current_path).to eq(new_address_path)
     end
+
+    it "I can delete an address" do
+      @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567)
+      @addr_3 = @user.addresses.create!(street: "Threet", city: "Walla Walla", state: "Cali", zip: 87654)
+
+      visit login_path
+
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: @user.password
+      click_button 'Log In'
+
+      within "#address-#{@addr_2.id}" do
+        click_button "Delete Address"
+      end
+
+      @addresses = Address.all
+      @addresses.reload
+
+      expect(current_path).to eq(profile_path)
+      expect(page).to_not have_content(@addr_2.state)
+    end
   end
 end
