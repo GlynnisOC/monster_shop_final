@@ -11,6 +11,7 @@ RSpec.describe Address do
 
   describe 'Relationships' do
     it { should belong_to :user }
+    it { should have_many :orders }
   end
 
   describe 'nicknames' do
