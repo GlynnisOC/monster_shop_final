@@ -110,6 +110,7 @@ RSpec.describe 'Order Show Page' do
       expect(current_path).to eq(profile_orders_path)
       @order_2.reload
       expect(@order_2.address_id).to eq(@addr_2.id)
+      expect(page).to have_content("Shipping Address updated for #{@order_2.id}")
     end
   end
 end
