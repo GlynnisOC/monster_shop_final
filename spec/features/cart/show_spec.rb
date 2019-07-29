@@ -185,13 +185,12 @@ RSpec.describe 'Cart Show Page' do
 
         within "#checkout" do
           expect(page).to have_content("Choose Shipping Address")
-          save_and_open_page
-          choose "Office"
-          click_button "Check Out"
+          choose("order_address_id_#{@addr_2.id}")
         end
+        click_button "Check Out"
 
         order = Order.last
-        expect(order.street).to eq(@addr_2.street)
+        expect(order.address_id).to eq(@addr_2.id)
       end
     end
   end
