@@ -9,6 +9,19 @@ class User::OrdersController < ApplicationController
     @order = current_user.orders.find(params[:id])
   end
 
+  def edit
+    @order = Order.find(params[:id])
+  end
+
+  def update
+    order = Order.find(params[:id])
+    address = Address.where(nickname: params[:nickname]).pluck(:id)
+    address_id = address.join.to_i
+    order.update_attribute(:address_id, address_id)
+    flash[:update] = "Shipping Address updated for #{order.id}"
+    redirect_to profile_orders_path
+  end
+
   def create
     order = current_user.orders.new(order_params)
     order.save
