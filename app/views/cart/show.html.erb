@@ -19,15 +19,19 @@
   <section id='checkout'>
     <% if current_user %>
       <p>Choose Shipping Address</p>
-      <%= form_for @order do |f| %>
-        <% current_user.addresses.each do |address| %>
-          <%= f.label :address_id, address.nickname %>
-          <%= f.radio_button :address_id, address.id %>
-        <% end %>
-        <%= f.submit 'Check Out' %>
-      <% end %>
-    <% else %>
+      <% if current_user.addresses.empty? %>
+        <p>You must <%= link_to 'add a shipping address', new_address_path %> to check out!</p>
+      <% elsif %>
+        <%= form_for @order do |f| %>
+          <% current_user.addresses.each do |address| %>
+            <%= f.label :address_id, address.nickname.capitalize %>
+            <%= f.radio_button :address_id, address.id %>
+            <% end %><br>
+            <%= f.submit 'Check Out' %>
+            <% end %>
+      <% else %>
       <p>You must <%= link_to 'register', registration_path %> or <%= link_to 'log in', login_path %> to checkout.</p>
+    <% end %>
     <% end %>
   </section>
   <%= button_to 'Empty Cart', '/cart', method: :delete %>
