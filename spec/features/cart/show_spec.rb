@@ -192,6 +192,45 @@ RSpec.describe 'Cart Show Page' do
         order = Order.last
         expect(order.address_id).to eq(@addr_2.id)
       end
+
+      it "if I have deleted all my addresses, I can't checkout and have to add an address" do
+        @user = User.create!(name: 'Megan', email: 'megan@example.com', password: 'securepassword')
+        @address = @user.addresses.create!(street: "Street", city: "City", state: "Washington", zip: 98765)
+        @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567, nickname: 1)
+
+        visit login_path
+
+        fill_in "Email", with: "megan@example.com"
+        fill_in "Password", with: "securepassword"
+
+        click_button "Log In"
+
+        within "#address-#{@address.id}" do
+          click_button "Delete Address"
+        end
+
+        within "#address-#{@addr_2.id}" do
+          click_button "Delete Address"
+        end
+
+        visit item_path(@ogre)
+        click_button 'Add to Cart'
+        visit item_path(@hippo)
+        click_button 'Add to Cart'
+        visit item_path(@hippo)
+        click_button 'Add to Cart'
+
+        visit '/cart'
+
+        within "#checkout" do
+          expect(page).to_not have_button "Check Out"
+        end
+
+        expect(page).to have_content "You must add a shipping address to check out!"
+
+        click_link "add a shipping address"
+        expect(current_path).to eq(new_address_path)
+      end
     end
   end
 end
