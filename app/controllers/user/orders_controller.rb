@@ -9,6 +9,11 @@ class User::OrdersController < ApplicationController
     @order = current_user.orders.find(params[:id])
   end
 
+  def edit
+    # binding.pry
+    @order = Order.find(params[:id])
+  end
+
   def create
     order = current_user.orders.new(order_params)
     order.save

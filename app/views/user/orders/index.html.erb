@@ -8,5 +8,8 @@
     <p>Status: <%= order.status %></p>
     <p><%= order.count_of_items %> items</p>
     <p>Total: <%= number_to_currency(order.grand_total) %></p>
+    <% if order.pending? %>
+      <%= button_to "Change Shipping Address", edit_profile_orders_path(order), method: :get %>
+    <% end %>
   </section>
 <% end %>
