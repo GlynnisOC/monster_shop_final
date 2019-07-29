@@ -10,7 +10,8 @@ class User::OrdersController < ApplicationController
   end
 
   def create
-    order = current_user.orders.new
+    binding.pry
+    order = current_user.orders.new(address_id: )
     order.save
       cart.items.each do |item|
         order.order_items.create({
