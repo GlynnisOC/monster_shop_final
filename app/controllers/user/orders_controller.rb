@@ -10,8 +10,11 @@ class User::OrdersController < ApplicationController
   end
 
   def edit
-    # binding.pry
     @order = Order.find(params[:id])
+  end
+
+  def update
+    binding.pry
   end
 
   def create

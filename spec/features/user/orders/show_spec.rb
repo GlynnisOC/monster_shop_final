@@ -12,8 +12,8 @@ RSpec.describe 'Order Show Page' do
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 1 )
       @user = User.create!(name: 'Megan', email: 'megan_1@example.com', password: 'securepassword')
       @address = @user.addresses.create!(street: "Street", city: "City", state: "Washington", zip: 98765)
-      @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567)
-      @addr_3 = @user.addresses.create!(street: "Threet", city: "Walla Walla", state: "Cali", zip: 87654)
+      @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567, nickname: 1)
+      @addr_3 = @user.addresses.create!(street: "Threet", city: "Walla Walla", state: "Cali", zip: 87654, nickname: 2)
       @order_1 = @user.orders.create!(address_id: @address.id, status: 1)
       @order_2 = @user.orders.create!(address_id: @address.id, status: 0)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
@@ -103,6 +103,13 @@ RSpec.describe 'Order Show Page' do
       end
 
       expect(current_path).to eq(edit_profile_orders_path(@order_2))
+
+      within "#address-#{@addr_2.id}" do
+        click_button "Choose #{@addr_2.nickname}!"
+      end
+      expect(current_path).to eq(profile_orders_path)
+
+      expect(@order_2.address_id).to eq(@addr_2.id)
     end
   end
 end

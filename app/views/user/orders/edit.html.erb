@@ -1,0 +1,11 @@
+<h3>Please choose the new shipping address!</h3>
+
+<% current_user.addresses.each do |address| %>
+  <section id="address-<%= address.id %>">
+    <%= address.street %>
+    <%= address.city %>
+    <%= address.state %>
+    <%= address.zip %>
+    <%= address.nickname %>
+    <%= button_to "Choose #{address.nickname}!", update_profile_orders_path(@order.address_id), method: :patch %>
+<% end %>
