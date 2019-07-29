@@ -104,11 +104,11 @@ RSpec.describe 'Order Show Page' do
 
       expect(current_path).to eq(edit_profile_orders_path(@order_2))
 
-      within "#address-#{@addr_2.id}" do
-        click_button "Choose #{@addr_2.nickname}!"
-      end
-      expect(current_path).to eq(profile_orders_path)
+      select "office", from: "Nickname"
+      click_button "Save"
 
+      expect(current_path).to eq(profile_orders_path)
+      @order_2.reload
       expect(@order_2.address_id).to eq(@addr_2.id)
     end
   end

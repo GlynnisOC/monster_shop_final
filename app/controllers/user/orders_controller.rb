@@ -14,7 +14,11 @@ class User::OrdersController < ApplicationController
   end
 
   def update
-    binding.pry
+    order = Order.find(params[:id])
+    address = Address.where(nickname: params[:nickname]).pluck(:id)
+    address_id = address.join.to_i
+    order.update_attribute(:address_id, address_id)
+    redirect_to profile_orders_path
   end
 
   def create
