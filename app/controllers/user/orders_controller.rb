@@ -11,7 +11,7 @@ class User::OrdersController < ApplicationController
 
   def create
     binding.pry
-    order = current_user.orders.new(address_id: )
+    order = current_user.orders.new
     order.save
       cart.items.each do |item|
         order.order_items.create({

@@ -19,15 +19,12 @@
   <section id='checkout'>
     <% if current_user %>
       <p>Choose Shipping Address</p>
-      <%= label_tag "Home" %>
-      <%= radio_button_tag "home", current_user.addresses[0] %>
-
-      <%= label_tag "Office" %>
-      <%= radio_button_tag "office", current_user.addresses[1] %>
-
-      <%= label_tag "School" %>
-      <%= radio_button_tag "school", current_user.addresses[2] %><br>
-
+      <%= form_tag '/orders' do %>
+        <% current_user.addresses.each do |address| %>
+          <%= label_tag :address_id, address.nickname.capitalize %>
+          <%= radio_button_tag :address_id, address.id %>
+        <% end %>
+      <% end %>
       <%= button_to 'Check Out', '/orders' %>
     <% else %>
       <p>You must <%= link_to 'register', registration_path %> or <%= link_to 'log in', login_path %> to checkout.</p>

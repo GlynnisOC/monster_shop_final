@@ -185,7 +185,8 @@ RSpec.describe 'Cart Show Page' do
 
         within "#checkout" do
           expect(page).to have_content("Choose Shipping Address")
-          choose "office"
+          save_and_open_page
+          choose "Office"
           click_button "Check Out"
         end
 
