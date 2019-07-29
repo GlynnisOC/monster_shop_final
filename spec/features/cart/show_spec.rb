@@ -167,6 +167,31 @@ RSpec.describe 'Cart Show Page' do
         expect(page).to_not have_content("#{@hippo.name}")
         expect(page).to have_content("Cart: 0")
       end
+
+      it "I can choose the shipping address for my order" do
+        @user = User.create!(name: 'Megan', email: 'megan@example.com', password: 'securepassword')
+        @address = @user.addresses.create!(street: "Street", city: "City", state: "Washington", zip: 98765)
+        @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567, nickname: 1)
+        @addr_3 = @user.addresses.create!(street: "Threet", city: "Walla Walla", state: "Cali", zip: 87654, nickname: 2)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+        visit item_path(@hippo)
+        click_button 'Add to Cart'
+
+        visit item_path(@ogre)
+        click_button 'Add to Cart'
+
+        visit '/cart'
+
+        within "#checkout" do
+          expect(page).to have_content("Choose Shipping Address")
+          choose("order_address_id_#{@addr_2.id}")
+        end
+        click_button "Check Out"
+
+        order = Order.last
+        expect(order.address_id).to eq(@addr_2.id)
+      end
     end
   end
 end
