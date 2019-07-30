@@ -112,5 +112,14 @@ RSpec.describe 'Order Show Page' do
       expect(@order_2.address_id).to eq(@addr_2.id)
       expect(page).to have_content("Shipping Address updated for #{@order_2.id}")
     end
+
+    it "I can see the chosen shipping address on each order" do
+      visit "/profile/orders/#{@order_2.id}"
+
+      expect(page).to have_content(@address.street)
+      expect(page).to have_content(@address.city)
+      expect(page).to have_content(@address.state)
+      expect(page).to have_content(@address.zip)
+    end
   end
 end
