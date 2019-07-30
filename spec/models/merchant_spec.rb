@@ -24,10 +24,12 @@ RSpec.describe Merchant do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @user_1 = User.create!(name: 'Megan', email: 'megan_1@example.com', password: 'securepassword')
+      @address_1 = @user_1.addresses.create!(street: "Street", city: "City", state: "Washington", zip: 98765)
       @user_2 = User.create!(name: 'Megan', email: 'megan_2@example.com', password: 'securepassword')
-      @order_1 = @user_1.orders.create!
-      @order_2 = @user_2.orders.create!(status: 1)
-      @order_3 = @user_2.orders.create!(status: 1)
+      @address_2 = @user_2.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567, nickname: 1)
+      @order_1 = @user_1.orders.create!(address_id: @address_1.id)
+      @order_2 = @user_2.orders.create!(address_id: @address_2.id, status: 1)
+      @order_3 = @user_2.orders.create!(address_id: @address_2.id, status: 1)
       @order_item_1 = @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_item_2 = @order_1.order_items.create!(item: @hippo, price: @hippo.price, quantity: 3)
       @order_item_3 = @order_2.order_items.create!(item: @giant, price: @hippo.price, quantity: 2)
@@ -46,7 +48,7 @@ RSpec.describe Merchant do
     end
 
     it '.distinct_cities' do
-      expect(@megan.distinct_cities).to eq(['Denver, CO', 'Denver, IA'])
+      expect(@megan.distinct_cities).to eq(["City, Washington", "Citytwo, Missouri"])
     end
 
     it '.pending_orders' do

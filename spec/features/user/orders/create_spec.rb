@@ -10,6 +10,7 @@ RSpec.describe 'Create Order' do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @user = User.create!(name: 'Megan', email: 'megan@example.com', password: 'securepassword')
+      @address = @user.addresses.create!(street: "Street", city: "City", state: "Washington", zip: 98765)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
@@ -23,8 +24,8 @@ RSpec.describe 'Create Order' do
 
       visit '/cart'
 
+      choose("order_address_id_#{@address.id}")
       click_button 'Check Out'
-
       order = Order.last
 
       expect(current_path).to eq('/profile/orders')

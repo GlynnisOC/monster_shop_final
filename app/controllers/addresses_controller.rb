@@ -18,7 +18,7 @@ class AddressesController < ApplicationController
 
   def update
     address = Address.find(params[:id])
-    address.update(address_params)
+    address.update(new_params)
     redirect_to profile_path
   end
 
@@ -33,5 +33,9 @@ class AddressesController < ApplicationController
 
   def address_params
     params.permit(:street, :city, :state, :zip, :nickname)
+  end
+
+  def new_params
+    params.permit(:street, :city, :state, :zip)
   end
 end

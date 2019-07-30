@@ -222,10 +222,6 @@ RSpec.describe 'Cart Show Page' do
 
         visit '/cart'
 
-        within "#checkout" do
-          expect(page).to_not have_button "Check Out"
-        end
-
         expect(page).to have_content "You must add a shipping address to check out!"
 
         click_link "add a shipping address"
