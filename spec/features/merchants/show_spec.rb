@@ -11,16 +11,18 @@ RSpec.describe 'Merchant Show Page' do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @user_1 = User.create!(name: 'Megan', email: 'megan_1@example.com', password: 'securepassword')
+      @user_1_address = @user_1.addresses.create!(street: "Mousse", city: "Chocolate", state: "Caramel", zip: 45783)
       @user_2 = User.create!(name: 'Megan', email: 'megan_2@example.com', password: 'securepassword')
-      @order_1 = @user_1.orders.create!
-      @order_2 = @user_2.orders.create!
-      @order_2 = @user_2.orders.create!
+      @user_2_address = @user_2.addresses.create!(street: "Elwood", city: "Cloey", state: "Sophie", zip: 64765)
+      @order_1 = @user_1.orders.create!(address_id: @user_1_address.id)
+      @order_2 = @user_2.orders.create!(address_id: @user_2_address.id)
+      @order_2 = @user_2.orders.create!(address_id: @user_2_address.id)
       @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2)
       @order_2.order_items.create!(item: @giant, price: @hippo.price, quantity: 2)
       @order_2.order_items.create!(item: @ogre, price: @hippo.price, quantity: 2)
     end
 
-    xit 'I see merchant name and address' do
+    it 'I see merchant name and address' do
       visit "/merchants/#{@megan.id}"
 
       expect(page).to have_content(@megan.name)
@@ -31,7 +33,7 @@ RSpec.describe 'Merchant Show Page' do
       end
     end
 
-    xit 'I see a link to this merchants items' do
+    it 'I see a link to this merchants items' do
       visit "/merchants/#{@megan.id}"
 
       click_link "Items"
@@ -39,17 +41,17 @@ RSpec.describe 'Merchant Show Page' do
       expect(current_path).to eq("/items")
     end
 
-    xit 'I see merchant statistics' do
+    it 'I see merchant statistics' do
       visit "/merchants/#{@megan.id}"
 
       within '.statistics' do
         expect(page).to have_content("Item Count: #{@megan.item_count}")
         expect(page).to have_content("Average Item Price: #{number_to_currency(@megan.average_item_price)}")
-        expect(page).to have_content("Cities Served:\nDenver, CO\nDenver, IA")
+        expect(page).to have_content("Cities Served:\nChocolate, Caramel\nCloey, Sophie")
       end
     end
 
-    xit 'I see stats for merchants with items, but no orders' do
+    it 'I see stats for merchants with items, but no orders' do
       visit "/merchants/#{@brian.id}"
 
       within '.statistics' do
@@ -59,7 +61,7 @@ RSpec.describe 'Merchant Show Page' do
       end
     end
 
-    xit 'I see stats for merchants with no items or orders' do
+    it 'I see stats for merchants with no items or orders' do
       visit "/merchants/#{@sal.id}"
 
       within '.statistics' do
