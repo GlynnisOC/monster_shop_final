@@ -14,18 +14,18 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-07-29T18:13:47-06:00">2019-07-29T18:13:47-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-07-29T18:28:24-06:00">2019-07-29T18:28:24-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">87.21%</span></span>
+    (<span class="covered_percent"><span class="yellow">87.79%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.9
+         0.91
        </span>
     </span> hits/line)
   </h2>
@@ -33,8 +33,8 @@
   <div>
     <b>22</b> files in total.
     <b>172</b> relevant lines. 
-    <span class="green"><b>150</b> lines covered</span> and
-    <span class="red"><b>22</b> lines missed </span>
+    <span class="green"><b>151</b> lines covered</span> and
+    <span class="red"><b>21</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -92,12 +92,12 @@
       
       <tr>
         <td class="strong"><a href="#2c4a6f55e45a710e7db0afc653cb2eb4020c2400" class="src_link" title="app/models/merchant.rb">app/models/merchant.rb</a></td>
-        <td class="red strong">68.75 %</td>
+        <td class="green strong">100.0 %</td>
         <td>35</td>
         <td>16</td>
-        <td>11</td>
-        <td>5</td>
-        <td>0.7</td>
+        <td>16</td>
+        <td>0</td>
+        <td>1.2</td>
       </tr>
       
       <tr>
@@ -112,12 +112,12 @@
       
       <tr>
         <td class="strong"><a href="#457f2387338f89be72740b2544a1c92ececd3959" class="src_link" title="app/models/order_item.rb">app/models/order_item.rb</a></td>
-        <td class="green strong">100.0 %</td>
+        <td class="red strong">60.0 %</td>
         <td>17</td>
         <td>10</td>
-        <td>10</td>
-        <td>0</td>
-        <td>1.3</td>
+        <td>6</td>
+        <td>4</td>
+        <td>0.6</td>
       </tr>
       
       <tr>
@@ -701,11 +701,11 @@
         <div class="source_table" id="2c4a6f55e45a710e7db0afc653cb2eb4020c2400">
   <div class="header">
     <h3>app/models/merchant.rb</h3>
-    <h4><span class="red">68.75 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
       <b>16</b> relevant lines. 
-      <span class="green"><b>11</b> lines covered</span> and
-      <span class="red"><b>5</b> lines missed.</span>
+      <span class="green"><b>16</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -790,8 +790,8 @@
           <code class="ruby">  def item_count</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="14">
-          
+        <li class="covered" data-hits="3" data-linenumber="14">
+          <span class="hits">3</span>
           
           <code class="ruby">    items.count</code>
         </li>
@@ -814,8 +814,8 @@
           <code class="ruby">  def average_item_price</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="18">
-          
+        <li class="covered" data-hits="2" data-linenumber="18">
+          <span class="hits">2</span>
           
           <code class="ruby">    items.average(:price)</code>
         </li>
@@ -841,7 +841,7 @@
         <li class="never" data-hits="" data-linenumber="22">
           
           
-          <code class="ruby">    orders.joins(&#39;JOIN users ON orders.user_id = users.id&#39;)</code>
+          <code class="ruby">    orders.joins(&#39;JOIN addresses ON orders.address_id = addresses.id&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="23">
@@ -856,10 +856,10 @@
           <code class="ruby">          .distinct</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="25">
+        <li class="covered" data-hits="1" data-linenumber="25">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">          .pluck(&quot;CONCAT_WS(&#39;, &#39;, users.city, users.state) AS city_state&quot;)</code>
+          <code class="ruby">          .pluck(&quot;CONCAT_WS(&#39;, &#39;, addresses.city, addresses.state) AS city_state&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="26">
@@ -880,8 +880,8 @@
           <code class="ruby">  def pending_orders</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="29">
-          
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
           
           <code class="ruby">    orders.where(status: &#39;pending&#39;)</code>
         </li>
@@ -904,8 +904,8 @@
           <code class="ruby">  def order_items_by_order(order_id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="33">
-          
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
           
           <code class="ruby">    order_items.where(order_id: order_id)</code>
         </li>
@@ -1225,11 +1225,11 @@
         <div class="source_table" id="457f2387338f89be72740b2544a1c92ececd3959">
   <div class="header">
     <h3>app/models/order_item.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="red">60.0 %</span> covered</h4>
     <div>
       <b>10</b> relevant lines. 
-      <span class="green"><b>10</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <span class="green"><b>6</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
     </div>
   </div>
   
@@ -1266,8 +1266,8 @@
           <code class="ruby">  def subtotal</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="6">
-          <span class="hits">3</span>
+        <li class="missed" data-hits="0" data-linenumber="6">
+          
           
           <code class="ruby">    quantity * price</code>
         </li>
@@ -1290,14 +1290,14 @@
           <code class="ruby">  def fulfill</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="10">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="10">
+          
           
           <code class="ruby">    update(fulfilled: true)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="11">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="11">
+          
           
           <code class="ruby">    item.update(inventory: item.inventory - quantity)</code>
         </li>
@@ -1320,8 +1320,8 @@
           <code class="ruby">  def fulfillable?</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="15">
-          <span class="hits">2</span>
+        <li class="missed" data-hits="0" data-linenumber="15">
+          
           
           <code class="ruby">    item.inventory &gt;= quantity</code>
         </li>
