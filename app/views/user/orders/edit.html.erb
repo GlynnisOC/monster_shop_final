@@ -3,6 +3,14 @@
 <%= form_tag profile_orders_path, method: :patch do %>
   <%= hidden_field_tag :address_id, @order.address_id %>
   <%= hidden_field_tag :id, @order.id %>
+  <% current_user.addresses.each do |address| %>
+    <h4>Address Details</h4>
+    <p>Street: <%= address.street %></p>
+    <p>City: <%= address.city %></p>
+    <p>State: <%= address.state %></p>
+    <p>Zip: <%= address.zip %></p>
+    <p>Nickname: <%= address.nickname %></p>
+  <% end %>
   <%= label_tag :nickname %>
   <%= select_tag :nickname, options_for_select(["home", "office", "school"]) %>
   <%= submit_tag "Save" %>

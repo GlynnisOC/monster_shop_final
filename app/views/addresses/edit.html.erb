@@ -14,7 +14,7 @@
   <%= number_field_tag :zip, params[:zip] %>
 
   <%= label_tag :nickname %>
-  <%= text_field_tag :nickname, params[:nickname] %>
+  <%= select_tag :nickname, options_for_select(["home", "office", "school"]) %>
 
   <%= submit_tag "Save Changes" %>
 
