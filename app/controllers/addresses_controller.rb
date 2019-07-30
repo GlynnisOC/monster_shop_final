@@ -36,6 +36,6 @@ class AddressesController < ApplicationController
   end
 
   def new_params
-    params.permit(:street, :city, :state, :zip)
+    params.permit(:street, :city, :state, :zip, :nickname)
   end
 end
