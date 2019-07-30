@@ -337,6 +337,48 @@
         1,
         null
       ],
+      "/Users/glynnisoconnell/repeat2/monster_shop_final/app/models/merchant.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/glynnisoconnell/repeat2/monster_shop_final/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
       "/Users/glynnisoconnell/repeat2/monster_shop_final/app/models/user.rb": [
         1,
         1,
@@ -349,11 +391,6 @@
         1,
         1,
         null,
-        1,
-        null
-      ],
-      "/Users/glynnisoconnell/repeat2/monster_shop_final/app/models/application_record.rb": [
-        1,
         1,
         null
       ],
@@ -371,8 +408,8 @@
         1,
         null,
         1,
-        1,
-        1,
+        0,
+        0,
         0,
         null,
         null,
@@ -426,12 +463,8 @@
         null,
         null
       ],
-      "/Users/glynnisoconnell/repeat2/monster_shop_final/app/controllers/admin/users_controller.rb": [
+      "/Users/glynnisoconnell/repeat2/monster_shop_final/app/controllers/admin/dashboard_controller.rb": [
         1,
-        1,
-        1,
-        null,
-        null,
         1,
         1,
         null,
@@ -486,11 +519,22 @@
         null,
         null,
         1,
+        1,
+        null,
+        null
+      ],
+      "/Users/glynnisoconnell/repeat2/monster_shop_final/app/controllers/admin/users_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
         0,
         null,
         null
       ]
     },
-    "timestamp": 1564449039
+    "timestamp": 1564449317
   }
 }
