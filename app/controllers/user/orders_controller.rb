@@ -15,11 +15,11 @@ class User::OrdersController < ApplicationController
   end
 
   def update
-    order = Order.find(params[:id])
+    @order = Order.find(params[:id])
     address = Address.where(nickname: params[:nickname]).pluck(:id)
     address_id = address.join.to_i
-    order.update_attribute(:address_id, address_id)
-    flash[:update] = "Shipping Address updated for #{order.id}"
+    @order.update_attribute(:address_id, address_id)
+    flash[:update] = "Shipping Address updated for #{@order.id}"
     redirect_to profile_orders_path
   end
 
