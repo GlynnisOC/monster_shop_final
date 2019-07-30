@@ -16,8 +16,11 @@ RSpec.describe Order do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @user = User.create!(name: 'Megan', email: 'megan_1@example.com', password: 'securepassword')
-      @order_1 = @user.orders.create!(status: "packaged")
-      @order_2 = @user.orders.create!(status: "pending")
+      @address = @user.addresses.create!(street: "Street", city: "City", state: "Washington", zip: 98765)
+      @addr_2 = @user.addresses.create!(street: "Street TWO", city: "Citytwo", state: "Missouri", zip: 43567, nickname: 1)
+      @addr_3 = @user.addresses.create!(street: "Threet", city: "Walla Walla", state: "Cali", zip: 87654, nickname: 2)
+      @order_1 = @user.orders.create!(address_id: @address.id, status: "packaged")
+      @order_2 = @user.orders.create!(address_id: @address.id, status: "pending")
       @order_item_1 = @order_1.order_items.create!(item: @ogre, price: @ogre.price, quantity: 5, fulfilled: true)
       @order_item_2 = @order_2.order_items.create!(item: @hippo, price: @hippo.price, quantity: 2, fulfilled: true)
       @order_item_3 = @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2, fulfilled: false)
@@ -70,10 +73,11 @@ RSpec.describe Order do
   describe 'class methods' do
     before :each do
       @user = User.create!(name: 'Megan', email: 'megan_1@example.com', password: 'securepassword')
-      @order_1 = @user.orders.create!(status: 1)
-      @order_2 = @user.orders.create!(status: 0)
-      @order_3 = @user.orders.create!(status: 3)
-      @order_4 = @user.orders.create!(status: 2)
+      @address = @user.addresses.create!(street: "Street", city: "City", state: "Washington", zip: 98765)
+      @order_1 = @user.orders.create!(address_id: @address.id, status: 1)
+      @order_2 = @user.orders.create!(address_id: @address.id, status: 0)
+      @order_3 = @user.orders.create!(address_id: @address.id, status: 3)
+      @order_4 = @user.orders.create!(address_id: @address.id, status: 2)
     end
 
     it '.by_status' do
