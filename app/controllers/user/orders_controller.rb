@@ -7,6 +7,7 @@ class User::OrdersController < ApplicationController
 
   def show
     @order = current_user.orders.find(params[:id])
+    @address = Address.find("#{@order.address_id}")
   end
 
   def edit
